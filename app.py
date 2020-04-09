@@ -27,7 +27,7 @@ db.create_all()
 #Creating a class to create get, post, put & delete methods
 class Movies_List(Resource):      
 #Instantiating a parser object to hold data from message payload
-	parser = reqparse.RequestParser()                      
+	parser = reqparse.RequestParser()      
 	parser.add_argument('director', type=str, required=False, help='Director of the movie')    
 	parser.add_argument('genre', type=str, required=False, help='Genre of the movie')    
 	parser.add_argument('collection', type=int, required=True, help='Gross collection of the movie') 
@@ -51,15 +51,15 @@ class Movies_List(Resource):
 	#PUT METHOD 
 	
 	#Creating the put method
-    	def put(self, movie):        
-		args = Movies_List.parser.parse_args()        
-		item = Movies.find_by_title(movie)        
-		if item:            
-		    item.collection = args['collection']            
-		    item.save_to()            
-		    return {'Movie': item.json()}        
-		item = Movies(movie, args['director'], args['genre'], args['collection'])        
-		item.save_to()        
+	def put(self, movie):
+		args = Movies_List.parser.parse_args()
+		item = Movies.find_by_title(movie)
+		if item:
+			item.collection = args['collection']
+			item.save_to()
+			return {'Movie': item.json()}
+		item = Movies(movie, args['director'], args['genre'], args['collection'])
+		item.save_to()
 		return item.json()
 	#DELETE METHOD 
 	def delete(self, movie):
