@@ -51,16 +51,16 @@ class Movies_List(Resource):
 	#PUT METHOD 
 	
 	#Creating the put method
-    def put(self, movie):        
-        args = Movies_List.parser.parse_args()        
-        item = Movies.find_by_title(movie)        
-        if item:            
-            item.collection = args['collection']            
-            item.save_to()            
-            return {'Movie': item.json()}        
-        item = Movies(movie, args['director'], args['genre'], args['collection'])        
-        item.save_to()        
-        return item.json()
+    	def put(self, movie):        
+		args = Movies_List.parser.parse_args()        
+		item = Movies.find_by_title(movie)        
+		if item:            
+		    item.collection = args['collection']            
+		    item.save_to()            
+		    return {'Movie': item.json()}        
+		item = Movies(movie, args['director'], args['genre'], args['collection'])        
+		item.save_to()        
+		return item.json()
 	#DELETE METHOD 
 	def delete(self, movie):
 		args = Movies.find_by_title(movie)
